@@ -29,8 +29,7 @@ public class PageRank {
 			bucketName = args[0];
 			runJobs();
 		} catch (IOException ex) {
-			Logger.getLogger(PageRank.class.getName()).log(Level.SEVERE, null,
-					ex);
+			Logger.getLogger(PageRank.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 
@@ -55,9 +54,8 @@ public class PageRank {
 		conf.set("xmlinput.start", "<page>");
 		conf.set("xmlinput.end", "</page>");
 
-		conf.set(
-				"io.serializations",
-				"org.apache.hadoop.io.serializer.JavaSerialization,org.apache.hadoop.io.serializer.WritableSerialization");
+		conf.set( "io.serializations",
+				  "org.apache.hadoop.io.serializer.JavaSerialization,org.apache.hadoop.io.serializer.WritableSerialization");
 
 		Job job = new Job(conf, "Build_InLink_Graph");
 
@@ -71,8 +69,8 @@ public class PageRank {
 		job.setOutputValueClass(Text.class);
 
 		String output = InputOutputPaths.S3N + bucketName
-				+ InputOutputPaths.TEMP_DIRECTORY
-				+ InputOutputPaths.ITER_0_JOB1;
+						+ InputOutputPaths.TEMP_DIRECTORY
+						+ InputOutputPaths.ITER_0_JOB1;
 		Path outPath = new Path(output);
 
 		FileOutputFormat.setOutputPath(job, outPath);
@@ -97,8 +95,7 @@ public class PageRank {
 				InlinkReducer.PAGES.COUNT).getValue())));
 	}
 
-	private static void buildInlinGraphWithPageRank(int total_Pages)
-			throws IOException {
+	private static void buildInlinGraphWithPageRank(int total_Pages) throws IOException {
 
 		Configuration config;
 		Job jobconf;
